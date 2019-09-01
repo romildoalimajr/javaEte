@@ -51,10 +51,12 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 499, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Login");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 374, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Senha");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 453, -1, -1));
 
@@ -104,10 +106,10 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // Código do botão entrar
         
-        if (txtLogin.getText().equals("") && passSenha.getPassword().equals("")){
+        if (txtLogin.getText().equals("") && passSenha.getText().equals("")){
            JOptionPane.showMessageDialog(null,"Digite o Login e a Senha!");
         }
-        if (txtLogin.getText().equals("admin")&& passSenha.getPassword().equals("admin")){
+        if (txtLogin.getText().equals("admin")&& passSenha.getText().equals("admin")){
             TelaInicial inicial = new TelaInicial();
             inicial.setVisible(true);
             dispose();

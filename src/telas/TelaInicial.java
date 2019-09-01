@@ -48,6 +48,7 @@ public class TelaInicial extends javax.swing.JFrame {
         menuCadCarro = new javax.swing.JMenuItem();
         menuCadFuncionario = new javax.swing.JMenuItem();
         menuCadProdutos = new javax.swing.JMenuItem();
+        menuCadUsuario = new javax.swing.JMenuItem();
         menuConsulta = new javax.swing.JMenu();
         menuConFuncionario = new javax.swing.JMenuItem();
         menuConVeiculo = new javax.swing.JMenuItem();
@@ -59,6 +60,7 @@ public class TelaInicial extends javax.swing.JFrame {
         menuRelOs = new javax.swing.JMenuItem();
         menuRelVendas = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
+        menuSair = new javax.swing.JMenu();
 
         jMenuItem3.setText("jMenuItem3");
 
@@ -158,6 +160,15 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         menuCadastro.add(menuCadProdutos);
 
+        menuCadUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconeUsuario (2).png"))); // NOI18N
+        menuCadUsuario.setText("Usuário");
+        menuCadUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadUsuarioActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(menuCadUsuario);
+
         jMenuBar1.add(menuCadastro);
 
         menuConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconeConsulta.png"))); // NOI18N
@@ -206,6 +217,15 @@ public class TelaInicial extends javax.swing.JFrame {
         menuAjuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconeHelp.png"))); // NOI18N
         menuAjuda.setText("Ajuda");
         jMenuBar1.add(menuAjuda);
+
+        menuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconeSair.png"))); // NOI18N
+        menuSair.setText("Sair");
+        menuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSairActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(menuSair);
 
         setJMenuBar(jMenuBar1);
 
@@ -294,6 +314,18 @@ public class TelaInicial extends javax.swing.JFrame {
         
     }//GEN-LAST:event_menuCadProdutosActionPerformed
 
+    private void menuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairActionPerformed
+        // TODO add your handling code here:]
+        System.exit(0);
+    }//GEN-LAST:event_menuSairActionPerformed
+
+    private void menuCadUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadUsuarioActionPerformed
+        // TODO add your handling code here:
+        TelaUsuario usuario = new TelaUsuario();
+        telaInterna.add(usuario);
+        usuario.setVisible(true);
+    }//GEN-LAST:event_menuCadUsuarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -346,6 +378,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuCadCarro;
     private javax.swing.JMenuItem menuCadFuncionario;
     private javax.swing.JMenuItem menuCadProdutos;
+    private javax.swing.JMenuItem menuCadUsuario;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenuItem menuConFuncionario;
     private javax.swing.JMenuItem menuConVeiculo;
@@ -353,6 +386,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuRelOs;
     private javax.swing.JMenuItem menuRelVendas;
     private javax.swing.JMenu menuRelatorio;
+    private javax.swing.JMenu menuSair;
     private javax.swing.JDesktopPane telaInterna;
     // End of variables declaration//GEN-END:variables
 
