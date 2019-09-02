@@ -58,7 +58,7 @@ public class ConnectionFactory {
                 System.err.println("Erro!" + ex);
             }
         }
-        closeConnection(com, stmt);
+
     }
     public static void closeConnection(Connection com, PreparedStatement stmt, ResultSet rs){
         if (rs != null){
@@ -83,7 +83,7 @@ public class ConnectionFactory {
                 System.err.println("Erro" + ex);
             }
         }
-        closeConnection(com, stmt, rs);
+
     }
     
 }
