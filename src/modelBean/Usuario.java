@@ -13,16 +13,20 @@ public class Usuario {
     
     private int codigo;
     private String nome;
+    private String login;
     private String cpf;
     private String senha;
     
+    // método construtor vazio da classe
     public Usuario(){
         
     }
-    public Usuario(int codigo, String nome, String cpf, String senha){
+    //método construtor da classe
+    public Usuario(int codigo, String nome, String login, String cpf, String senha){
         
         this.codigo = codigo;
         this.nome = nome;
+        this.login = login;
         this.cpf = cpf;
         this.senha = senha;
     }
@@ -37,6 +41,12 @@ public class Usuario {
     }
     public String getNome(){
         return this.nome;
+    }
+    public void setLogin(String login){
+        this.login = login;
+    }
+    public String getLogin(){
+        return this.login;
     }
     public void setCpf(String cpf){
         this.cpf = cpf;

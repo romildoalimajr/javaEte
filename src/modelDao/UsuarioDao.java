@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelBean.dao;
+package modelDao;
 
 import com.mysql.jdbc.PreparedStatement;
 import conexao.ConnectionFactory;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelBean.Usuario;
 
 /**
@@ -24,18 +27,21 @@ public class UsuarioDao {
     }
     public boolean salvarUsuario(Usuario usuarios){
     
-    String sql = "INSERT INTO usuario (codigo, nome, cpf, senha) VALUES (DEFAULT,?,?,?);";
+    String sql = "INSERT INTO usuario (codigo, nome, login, cpf, senha) VALUES (DEFAULT,?,?,?,?);";
     
     PreparedStatement stmt = null;
+    ResultSet rs = null;
     
         try {
             stmt = (PreparedStatement) com.prepareStatement(sql);
             
             stmt.setString(2, usuarios.getNome());
-            stmt.setString(3, usuarios.getCpf());
-            stmt.setString(4, usuarios.getSenha());
+            stmt.setString(3, usuarios.getLogin());
+            stmt.setString(4, usuarios.getCpf());
+            stmt.setString(5, usuarios.getSenha());
             
             stmt.execute();
+            
             com.close();
             return true;
             
@@ -46,5 +52,25 @@ public class UsuarioDao {
         }finally{
             ConnectionFactory.closeConnection((com.mysql.jdbc.Connection) com, stmt);
         }
+    }
+    public String conectarUsuario(Usuario login, Usuario senha){
+        String sql = "SELECT INTO usuario WHERE login=? and senha=?";
+        
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt.setString(1, login.getLogin());
+            stmt.setString(2, senha.getSenha());
+            
+            stmt.execute();
+          
+            com.close();
+            
+            
+        } catch (SQLException ex) {
+            System.err.println("erro " + ex);
+            
+        }   
+        return null;
     }
 }

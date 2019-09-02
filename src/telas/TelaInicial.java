@@ -6,11 +6,8 @@
 package telas;
 
 import static java.awt.Color.red;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 /**
  *
  * @author Romildo A. Lima Jr.
@@ -285,10 +282,8 @@ public class TelaInicial extends javax.swing.JFrame {
                 break;
             case "7":
                 jlbDia.setText("Sábado");
-                break;
-            
-        }
-       
+                break;   
+        }       
     }//GEN-LAST:event_formWindowOpened
 
     private void menuCadCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadCarroActionPerformed

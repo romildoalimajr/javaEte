@@ -5,21 +5,29 @@
  */
 package telas;
 
+import conexao.ConnectionFactory;
 import static java.awt.Color.red;
 import javax.swing.JOptionPane;
+import static javax.swing.UIManager.getString;
+import modelBean.Usuario;
+import modelDao.UsuarioDao;
 
 /**
  *
- * @author ALPHA OMEGA
+ * @author Romildo A. Lima Jr.
  */
 public class TelaLogin extends javax.swing.JFrame {
-
+    ConnectionFactory com = new ConnectionFactory();
+    Usuario usuarios = new Usuario();
+    UsuarioDao usuario = new UsuarioDao();
     /**
      * Creates new form TelaLogin
      */
     public TelaLogin() {
         initComponents();
         getContentPane().setBackground(red);
+        com.getConnection();
+       
     }
 
     /**
@@ -42,6 +50,7 @@ public class TelaLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 0, 51));
         setForeground(new java.awt.Color(153, 0, 0));
+        setMinimumSize(new java.awt.Dimension(509, 600));
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -53,18 +62,18 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Login");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 374, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Senha");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 453, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, -1, -1));
 
         txtLogin.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        getContentPane().add(txtLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 414, 315, -1));
+        getContentPane().add(txtLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 315, -1));
 
         passSenha.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        getContentPane().add(passSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 488, 315, -1));
+        getContentPane().add(passSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 315, -1));
 
         btnEntrar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconeEntrar.png"))); // NOI18N
@@ -83,7 +92,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 btnEntrarKeyPressed(evt);
             }
         });
-        getContentPane().add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 534, 139, -1));
+        getContentPane().add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 139, -1));
 
         btnCancelar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconeSai.png"))); // NOI18N
@@ -92,7 +101,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(285, 534, 132, -1));
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 500, 132, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -108,48 +117,21 @@ public class TelaLogin extends javax.swing.JFrame {
         
         if (txtLogin.getText().equals("") && passSenha.getText().equals("")){
            JOptionPane.showMessageDialog(null,"Digite o Login e a Senha!");
-        }
-        if (txtLogin.getText().equals("admin")&& passSenha.getText().equals("admin")){
-            TelaInicial inicial = new TelaInicial();
-            inicial.setVisible(true);
-            dispose();
         }else{
-            JOptionPane.showMessageDialog(null,"Login e/ou Senha Inválido!");
-            txtLogin.setText("");
-            passSenha.setText("");
-        }
+            ConnectionFactory.getConnection();
+            usuarios.setLogin(getString(txtLogin));
+            usuarios.setSenha(getString(passSenha));
+        }   
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseClicked
         // TODO add your handling code here:
-        if (txtLogin.getText().equals("") && passSenha.getPassword().equals("")){
-           JOptionPane.showMessageDialog(null,"Digite o Login e a Senha!");
-        }
-        if (txtLogin.getText().equals("admin")&& passSenha.getPassword().equals("admin")){
-            TelaInicial inicial = new TelaInicial();
-            inicial.setVisible(true);
-            dispose();
-        }else{
-            JOptionPane.showMessageDialog(null,"Login e/ou Senha Inválido!");
-            txtLogin.setText("");
-            passSenha.setText("");
-        }
+        
     }//GEN-LAST:event_btnEntrarMouseClicked
 
     private void btnEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnEntrarKeyPressed
         // TODO add your handling code here:
-        if (txtLogin.getText().equals("") && passSenha.getPassword().equals("")){
-           JOptionPane.showMessageDialog(null,"Digite o Login e a Senha!");
-        }
-        if (txtLogin.getText().equals("admin")&& passSenha.getPassword().equals("admin")){
-            TelaInicial inicial = new TelaInicial();
-            inicial.setVisible(true);
-            dispose();
-        }else{
-            JOptionPane.showMessageDialog(null,"Login e/ou Senha Inválido!");
-            txtLogin.setText("");
-            passSenha.setText("");
-        }
+        
     }//GEN-LAST:event_btnEntrarKeyPressed
 
     /**
