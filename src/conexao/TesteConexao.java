@@ -5,7 +5,6 @@
  */
 package conexao;
 
-import com.mysql.jdbc.Connection;
 
 /**
  *
@@ -14,19 +13,9 @@ import com.mysql.jdbc.Connection;
 public  class TesteConexao {
     
     public static void main (String args[]){
-        
-        ConnectionFactory com = new ConnectionFactory();
-        
-        ConnectionFactory.getConnection();
-        
-        if (ConnectionFactory.getConnection()!= null){
-            System.out.println("Conexão Bem Sucedida!");
-            ConnectionFactory.closeConnection((Connection) com);
-            System.out.println("Conexão Fechada");
-    }else{
-            System.out.println("Falha na Conexão!");
-        }
-        
-       
+        DataSource ds = new DataSource();
+        ds.closeDataSource();
     }
+        
+    
 }

@@ -5,48 +5,56 @@
  */
 package modelDao;
 
-import com.mysql.jdbc.PreparedStatement;
-import conexao.ConnectionFactory;
-import java.sql.Connection;
+import conexao.DataSource;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modelBean.Funcionarios;
+
+
 
 /**
  *
  * @author Romildo A. Lima Jr.
  */
 public class FuncionariosDao {
+    private DataSource dataSource;
     
-    private Connection com = null;
-    
-    public FuncionariosDao(){
-        com = ConnectionFactory.getConnection();
+    public FuncionariosDao(DataSource dataSource){
+        this.dataSource = dataSource;
     }
     
-    public boolean salvar(Funcionarios funcionarios){
+    public ArrayList<Funcionarios> readAll(){
         
-        
-        String sql = "INSERT INTO funcionarios (nome, cpf, telefone, funcao) VALUES (?,?,?,?)";
-       
-        PreparedStatement stmt = null;
-        
-        try {
-            stmt = (PreparedStatement) com.prepareStatement(sql);
+        try{
+            String sql = "SELECT * FROM funcionarios";
             
-            stmt.setString(1, funcionarios.getNome());
-            stmt.setString(2, funcionarios.getCpf());
-            stmt.setString(3, funcionarios.getTelefone());
-            stmt.setString(4, funcionarios.getFuncao());
+            PreparedStatement ps = dataSource.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
             
-            return true;
+            ArrayList<Funcionarios> lista = new ArrayList<Funcionarios>();
             
-        } catch (SQLException ex) {
-            System.err.println("Erro " + ex);
-            
-            return false;
-            
-        }finally{
-            ConnectionFactory.closeConnection((com.mysql.jdbc.Connection) com, stmt);
+            while(rs.next()){
+                Funcionarios funcionario = new Funcionarios();
+                funcionario.setId(rs.getInt("id"));
+                funcionario.setNome(rs.getString("nome"));
+                funcionario.setCpf(rs.getString("cpf"));
+                funcionario.setFuncao(rs.getString("funcao"));
+                funcionario.setTelefone(rs.getString("telefone"));
+                lista.add(funcionario);
+            }
+            ps.close();
+            return lista;
         }
+        catch(SQLException ex){
+            System.err.println("Erro ao recuperar..."+ ex.getMessage());
+        }
+        catch(Exception ex){
+            System.err.println("Erro geral..."+ ex.getMessage());
+        }
+        return null;
     }
+    
+    
 }

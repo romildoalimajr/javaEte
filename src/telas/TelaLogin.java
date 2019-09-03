@@ -5,10 +5,8 @@
  */
 package telas;
 
-import conexao.ConnectionFactory;
 import static java.awt.Color.red;
 import javax.swing.JOptionPane;
-import static javax.swing.UIManager.getString;
 import modelBean.Usuario;
 import modelDao.UsuarioDao;
 
@@ -17,16 +15,15 @@ import modelDao.UsuarioDao;
  * @author Romildo A. Lima Jr.
  */
 public class TelaLogin extends javax.swing.JFrame {
-    ConnectionFactory com = new ConnectionFactory();
-    Usuario usuarios = new Usuario();
-    UsuarioDao usuario = new UsuarioDao();
+
+
     /**
      * Creates new form TelaLogin
      */
     public TelaLogin() {
         initComponents();
         getContentPane().setBackground(red);
-        com.getConnection();
+
        
     }
 
@@ -118,9 +115,7 @@ public class TelaLogin extends javax.swing.JFrame {
         if (txtLogin.getText().equals("") && passSenha.getText().equals("")){
            JOptionPane.showMessageDialog(null,"Digite o Login e a Senha!");
         }else{
-            ConnectionFactory.getConnection();
-            usuarios.setLogin(getString(txtLogin));
-            usuarios.setSenha(getString(passSenha));
+         
         }   
     }//GEN-LAST:event_btnEntrarActionPerformed
 

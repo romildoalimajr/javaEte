@@ -5,22 +5,17 @@
  */
 package telas;
 
-import conexao.ConnectionFactory;
 import static java.awt.Color.red;
 import javax.swing.JOptionPane;
 import static javax.swing.UIManager.getString;
-import modelBean.Usuario;
-import modelDao.UsuarioDao;
 
 /**
  *
- * @author ALPHA OMEGA
+ * @author Romildo A. Lima Jr.
  */
 public class TelaUsuario extends javax.swing.JInternalFrame {
     
-    ConnectionFactory conexao = new ConnectionFactory();
-    UsuarioDao novoUsuario = new UsuarioDao();
-    Usuario novo = new Usuario();
+
     /**
      * Creates new form TelaUsuario
      */
@@ -230,16 +225,12 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
-       ConnectionFactory.getConnection();
+
        
         if (passSenha.getText().equals(passConfirme.getText())){
             
             
-            novo.setNome(getString(txtNome));
-            novo.setCpf(getString(txtCpf));
-            novo.setSenha(getString(passSenha));
-            
-            novoUsuario.salvarUsuario(novo);
+      
             
             JOptionPane.showMessageDialog(null, "Usuário Cadastrado com Sucesso!");
             

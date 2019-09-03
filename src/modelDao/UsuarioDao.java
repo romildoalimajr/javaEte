@@ -5,72 +5,56 @@
  */
 package modelDao;
 
-import com.mysql.jdbc.PreparedStatement;
-import conexao.ConnectionFactory;
-import java.sql.Connection;
+import conexao.DataSource;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import modelBean.Usuario;
 
 /**
  *
- * @author ALPHA OMEGA
+ * @author Romildo A. Lima Jr.
  */
 public class UsuarioDao {
     
-    private Connection com = null;
+    private DataSource dataSource;
     
-    public UsuarioDao(){
-        com = ConnectionFactory.getConnection();
+    public UsuarioDao(DataSource dataSource){
+        this.dataSource = dataSource;
+        
     }
-    public boolean salvarUsuario(Usuario usuarios){
     
-    String sql = "INSERT INTO usuario (codigo, nome, login, cpf, senha) VALUES (DEFAULT,?,?,?,?);";
-    
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
-    
-        try {
-            stmt = (PreparedStatement) com.prepareStatement(sql);
+    public ArrayList<Usuario> readAll(){
+        
+        try{
+            String sql = "SELECT * FROM usuario";
             
-            stmt.setString(2, usuarios.getNome());
-            stmt.setString(3, usuarios.getLogin());
-            stmt.setString(4, usuarios.getCpf());
-            stmt.setString(5, usuarios.getSenha());
+            PreparedStatement ps = dataSource.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
             
-            stmt.execute();
+            ArrayList<Usuario> lista = new ArrayList<Usuario>();
             
-            com.close();
-            return true;
-            
-        } catch (SQLException ex) {
-            System.err.println("Erro " + ex);
-            
-            return false;
-        }finally{
-            ConnectionFactory.closeConnection((com.mysql.jdbc.Connection) com, stmt);
+            while(rs.next()){
+                
+                Usuario usuario = new Usuario();
+                
+                usuario.setCodigo(rs.getInt("codigo"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setLogin(rs.getString("login"));
+                usuario.setCpf(rs.getString("cpf"));
+                usuario.setSenha(rs.getString("senha"));
+                lista.add(usuario);
+            }
+            ps.close();
+            return lista;
         }
-    }
-    public String conectarUsuario(Usuario login, Usuario senha){
-        String sql = "SELECT INTO usuario WHERE login=? and senha=?";
-        
-        PreparedStatement stmt = null;
-        
-        try {
-            stmt.setString(1, login.getLogin());
-            stmt.setString(2, senha.getSenha());
-            
-            stmt.execute();
-          
-            com.close();
-            
-            
-        } catch (SQLException ex) {
-            System.err.println("erro " + ex);
-            
-        }   
+        catch(SQLException ex){
+         System.err.println("Erro ao recuperar..."+ ex.getMessage()) ;  
+        }
+        catch(Exception ex){
+            System.err.println("Erro geral..."+ ex.getMessage());
+        }
         return null;
     }
 }
