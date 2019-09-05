@@ -51,6 +51,7 @@ public class DataSource {
     public void closeDataSource(){
         try{
             connection.close();
+            System.out.println("Banco Fechado!");
         }
     catch(Exception ex){
         System.err.println("Erro ao desconectar..."+ex.getMessage());

@@ -23,7 +23,7 @@ public class LogarDao {
    public boolean login(String login, String senha){
         
        boolean check = false;
-        
+       
         try{
             String sql = "SELECT * FROM usuario WHERE login=? AND senha=?";
             
@@ -36,6 +36,7 @@ public class LogarDao {
                    check = true;
                }
            }
+            dataSource.closeDataSource();
             return check;
         }
         catch(SQLException ex){

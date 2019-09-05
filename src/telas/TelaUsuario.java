@@ -5,9 +5,12 @@
  */
 package telas;
 
+import conexao.DataSource;
 import static java.awt.Color.red;
 import javax.swing.JOptionPane;
 import static javax.swing.UIManager.getString;
+import modelBean.Usuario;
+import modelDao.LogarDao;
 
 /**
  *
@@ -44,7 +47,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         txtCpf = new javax.swing.JFormattedTextField();
         btnCadastrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        txtNome1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtLogin = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -110,8 +112,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
-        txtNome1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-
         jLabel6.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Nome.:");
@@ -142,9 +142,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel6))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(jLabel7)
@@ -182,7 +180,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel6)
-                    .addComponent(txtNome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +201,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCadastrar)
                     .addComponent(btnCancelar))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
@@ -224,19 +221,23 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        // TODO add your handling code here:
+        // Código do botão cadastrar
+        
+        DataSource dataSource = new DataSource();
+        LogarDao dao = new LogarDao(dataSource);
+        Usuario cadastro = new Usuario();
+        
+        String nome = new String(txtNome.getText().trim());
+        String login = new String(txtLogin.getText().trim());
+        String cpf = new String(txtCpf.getText().trim());
+        String senha = new String(passSenha.getPassword());
+        
+        cadastro.setNome(nome);
+        cadastro.setLogin(login);
+        cadastro.setCpf(cpf);
+        cadastro.setSenha(senha);
+     
 
-       
-        if (passSenha.getText().equals(passConfirme.getText())){
-            
-            
-      
-            
-            JOptionPane.showMessageDialog(null, "Usuário Cadastrado com Sucesso!");
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "Senha não Confere!");
-        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
 
@@ -255,6 +256,5 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtNome1;
     // End of variables declaration//GEN-END:variables
 }

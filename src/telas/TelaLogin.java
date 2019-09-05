@@ -16,15 +16,13 @@ import modelDao.LogarDao;
  */
 public class TelaLogin extends javax.swing.JFrame {
 
-
+       
     /**
      * Creates new form TelaLogin
      */
     public TelaLogin() {
         initComponents();
-        getContentPane().setBackground(red);
-
-       
+        getContentPane().setBackground(red);  
     }
 
     /**
@@ -74,19 +72,9 @@ public class TelaLogin extends javax.swing.JFrame {
 
         btnEntrar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconeEntrar.png"))); // NOI18N
-        btnEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEntrarMouseClicked(evt);
-            }
-        });
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntrarActionPerformed(evt);
-            }
-        });
-        btnEntrar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnEntrarKeyPressed(evt);
             }
         });
         getContentPane().add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 139, -1));
@@ -107,37 +95,31 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         System.exit(0);
+        
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        // Código do botão entrar
+        // Código do Botão Entrar
+        
         DataSource dataSource = new DataSource();
         TelaInicial inicial = new TelaInicial();
         LogarDao dao = new LogarDao(dataSource);
+        inicial.setVisible(true);
+        dispose();
         
-        if(txtLogin.getText().equals("") && passSenha.getText().equals("")){
-            JOptionPane.showMessageDialog(null,"Digite Login e Senha!");
-            txtLogin.setText("");
-            passSenha.setText("");
-        }
-        
-        if(dao.login(txtLogin.getText(), passSenha.getText())){
-            inicial.setVisible(true);
-            dispose();
-        }else{
-            JOptionPane.showMessageDialog(null,"Login e/ou Senha Inválido!");
-        }
+//        
+//        String user = txtLogin.getText().trim();
+//        String senha = new String(passSenha.getPassword());
+//        
+//        if(dao.login(user, senha)){
+//            inicial.setVisible(true);
+//            dispose();
+//        }else{
+//            JOptionPane.showMessageDialog(null,"Login e/ou Senha Inválido!");
+//            txtLogin.setText("");
+//            passSenha.setText("");
+//        }
     }//GEN-LAST:event_btnEntrarActionPerformed
-
-    private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnEntrarMouseClicked
-
-    private void btnEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnEntrarKeyPressed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnEntrarKeyPressed
 
     /**
      * @param args the command line arguments
