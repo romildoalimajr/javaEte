@@ -8,7 +8,8 @@ package telas;
 import conexao.DataSource;
 import static java.awt.Color.red;
 import javax.swing.JOptionPane;
-import modelDao.LogarDao;
+import modelDao.UsuarioDao;
+
 
 /**
  *
@@ -101,24 +102,22 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // Código do Botão Entrar
         
-        DataSource dataSource = new DataSource();
-        TelaInicial inicial = new TelaInicial();
-        LogarDao dao = new LogarDao(dataSource);
-        inicial.setVisible(true);
-        dispose();
+        String login = new String(txtLogin.getText().trim());
+        String senha = new String(passSenha.getPassword());
         
-//        
-//        String user = txtLogin.getText().trim();
-//        String senha = new String(passSenha.getPassword());
-//        
-//        if(dao.login(user, senha)){
-//            inicial.setVisible(true);
-//            dispose();
-//        }else{
-//            JOptionPane.showMessageDialog(null,"Login e/ou Senha Inválido!");
-//            txtLogin.setText("");
-//            passSenha.setText("");
-//        }
+        DataSource dataSource = new DataSource();
+        UsuarioDao dao = new UsuarioDao(dataSource);
+        
+        if (dao.logarUsuario(login, senha)){
+            TelaInicial inicial = new TelaInicial();
+            inicial.setVisible(true);
+            dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "Usuário e/ou Senha Inválido!");
+            txtLogin.setText("");
+            passSenha.setText("");
+        }
+        
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**

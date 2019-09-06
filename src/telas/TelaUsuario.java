@@ -7,10 +7,7 @@ package telas;
 
 import conexao.DataSource;
 import static java.awt.Color.red;
-import javax.swing.JOptionPane;
-import static javax.swing.UIManager.getString;
 import modelBean.Usuario;
-import modelDao.LogarDao;
 
 /**
  *
@@ -224,7 +221,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         // Código do botão cadastrar
         
         DataSource dataSource = new DataSource();
-        LogarDao dao = new LogarDao(dataSource);
+      
         Usuario cadastro = new Usuario();
         
         String nome = new String(txtNome.getText().trim());

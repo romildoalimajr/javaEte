@@ -27,6 +27,37 @@ public class UsuarioDao {
         this.dataSource = dataSource;
         
     }
+    public boolean logarUsuario(String login, String senha){
+        
+        boolean autenticar = false;
+        
+        String sql = "SELECT * FROM usuario WHERE login=? AND senha=?";
+        
+        try{
+            PreparedStatement ps;
+            try {
+                ps = dataSource.getConnection().prepareStatement(sql);
+            
+                ps.setString(1, login);
+                ps.setString(2, senha);
+            
+                ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()){
+                autenticar = true;
+                ps.close();
+                }else{
+                System.err.println("Usuário ou senha não encontrado");
+            }
+            } catch (SQLException ex) {
+                System.err.println("Deu Pau");
+            }
+            return autenticar;
+        }finally{
+            dataSource.closeDataSource();
+        }
+    }
+    
     public void cadastroUsuario(String nome, String login, String cpf, String senha){
         
         String sql = "INSERT INTO usuario (nome, login, cpf, senha)"
@@ -47,9 +78,7 @@ public class UsuarioDao {
             JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
             }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Usuário não Cadastrado!");
-        }
-      
-        
+        } 
     }
     public ArrayList<Usuario> readAll(){
         
