@@ -5,6 +5,10 @@
  */
 package telas;
 
+import conexao.DataSource;
+import modelBean.Produtos;
+import modelDao.ProdutosDao;
+
 /**
  *
  * @author ALPHA OMEGA
@@ -39,7 +43,7 @@ public class TelaProdutos extends javax.swing.JInternalFrame {
         txtProduto = new javax.swing.JTextField();
         txtCodigo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtDecricao = new javax.swing.JTextArea();
+        txtDescricao = new javax.swing.JTextArea();
         txtQuantidade = new javax.swing.JTextField();
         txtPrecoVenda = new javax.swing.JFormattedTextField();
         txtPrecoCompra = new javax.swing.JFormattedTextField();
@@ -49,6 +53,8 @@ public class TelaProdutos extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblProdutos = new javax.swing.JTable();
         btnPesquisar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -99,16 +105,24 @@ public class TelaProdutos extends javax.swing.JInternalFrame {
 
         jScrollPane1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
-        txtDecricao.setColumns(20);
-        txtDecricao.setRows(5);
-        jScrollPane1.setViewportView(txtDecricao);
+        txtDescricao.setColumns(20);
+        txtDescricao.setRows(5);
+        jScrollPane1.setViewportView(txtDescricao);
 
         txtQuantidade.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
-        txtPrecoVenda.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        try {
+            txtPrecoVenda.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###,##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtPrecoVenda.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
-        txtPrecoCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+        try {
+            txtPrecoCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###,##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtPrecoCompra.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
         btnExcluir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -118,6 +132,11 @@ public class TelaProdutos extends javax.swing.JInternalFrame {
         btnCadastrar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconeProdutos.png"))); // NOI18N
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconeAlterar.png"))); // NOI18N
@@ -144,6 +163,14 @@ public class TelaProdutos extends javax.swing.JInternalFrame {
         btnPesquisar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconePesquisar.png"))); // NOI18N
         btnPesquisar.setText("Pesquisar");
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("R$");
+
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("R$");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,12 +210,19 @@ public class TelaProdutos extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel6)
-                                    .addComponent(txtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(11, 11, 11)
+                                        .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel8)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel6)))))
+                        .addGap(0, 19, Short.MAX_VALUE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -221,11 +255,15 @@ public class TelaProdutos extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPesquisar)
@@ -240,6 +278,28 @@ public class TelaProdutos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        // Código do botão cadastrar produto.
+        
+        DataSource dataSource = new DataSource();
+        Produtos novo = new Produtos();
+        ProdutosDao dao = new ProdutosDao(dataSource);
+        
+        novo.setNome(txtProduto.getText());
+        novo.setDescricao(txtDescricao.getText());
+        novo.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+        novo.setCompra(Double.parseDouble(txtPrecoCompra.getText()));
+        novo.setVenda(Double.parseDouble(txtPrecoVenda.getText()));
+       
+        dao.cadastrarProdutos(novo.getNome(), novo.getDescricao(), novo.getQuantidade(), novo.getCompra(), novo.getVenda());
+        
+        txtProduto.setText("");
+        txtDescricao.setText("");
+        txtPrecoVenda.setText("");
+        txtPrecoCompra.setText("");
+        txtQuantidade.setText("");
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -253,13 +313,15 @@ public class TelaProdutos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable tblProdutos;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextArea txtDecricao;
+    private javax.swing.JTextArea txtDescricao;
     private javax.swing.JFormattedTextField txtPrecoCompra;
     private javax.swing.JFormattedTextField txtPrecoVenda;
     private javax.swing.JTextField txtProduto;

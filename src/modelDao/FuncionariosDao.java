@@ -10,6 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import modelBean.Funcionarios;
 
 
@@ -23,6 +26,34 @@ public class FuncionariosDao {
     
     public FuncionariosDao(DataSource dataSource){
         this.dataSource = dataSource;
+    }
+    
+    public void cadastroFuncionarios(String nome, String cpf, String telefone, String funcao ){
+        
+        DataSource dataSource = new DataSource();
+        
+        try {
+           
+            PreparedStatement ps = dataSource.getConnection().prepareStatement("INSERT INTO funcionarios (nome, cpf, telefone, funcao) "
+                + "VALUES (?,?,?,?);");
+            
+            ps.setString(1, nome);
+            ps.setString(2, cpf);
+            ps.setString(3, telefone);
+            ps.setString(4, funcao);
+            
+            ps.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Funcionário Cadastrado com Sucesso!");
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Cadastrar Funcionário!");
+            System.err.println("Deu merda " + ex.getMessage());
+        }finally{
+            dataSource.closeDataSource();
+        }
     }
     
     public ArrayList<Funcionarios> readAll(){

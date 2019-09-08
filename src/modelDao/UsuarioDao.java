@@ -9,6 +9,7 @@ import conexao.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,25 +61,27 @@ public class UsuarioDao {
     
     public void cadastroUsuario(String nome, String login, String cpf, String senha){
         
-        String sql = "INSERT INTO usuario (nome, login, cpf, senha)"
-                + "VALUES (?,?,?,?)";
-        try{
-            Usuario cadastro  = new Usuario();    
-            PreparedStatement ps;
-            ps = dataSource.getConnection().prepareStatement(sql);
+       DataSource dataSource = new DataSource();
+       
+        try {
+            PreparedStatement ps = dataSource.getConnection().prepareStatement("INSERT INTO usuario (nome, login, cpf, senha) "
+                    + "VALUES (?,?,?,?);");
             ps.setString(1, nome);
             ps.setString(2, login);
             ps.setString(3, cpf);
             ps.setString(4, senha);
             
-            ResultSet rs = ps.executeQuery();
+            ps.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Usuário Cadastrado com Sucesso!");
             
             ps.close();
             
-            JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
-            }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Usuário não Cadastrado!");
-        } 
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Usuário não cadastrado!");
+        }finally{
+            dataSource.closeDataSource();
+        }
     }
     public ArrayList<Usuario> readAll(){
         

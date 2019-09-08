@@ -20,9 +20,10 @@ public class Funcionarios {
     public Funcionarios(){
         
     }
-    public Funcionarios(String cpf, String nome, String telefone, String funcao) {
-        this.cpf = cpf;
+    public Funcionarios(String nome, String cpf, String telefone, String funcao) {
+        
         this.nome = nome;
+        this.cpf = cpf;
         this.telefone = telefone;
         this.funcao = funcao;
     }
@@ -39,10 +40,10 @@ public class Funcionarios {
         return this.cpf;
     }
     public void setNome(String nome){
-        this.cpf = cpf;
+        this.nome = nome;
     }
     public String getNome(){
-        return this.cpf;
+        return this.nome;
     }
     public void setTelefone(String telefone){
         this.telefone = telefone;

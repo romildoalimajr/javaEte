@@ -5,12 +5,19 @@
  */
 package telas;
 
+import conexao.DataSource;
+import javax.swing.JOptionPane;
+import modelBean.Funcionarios;
+import modelDao.FuncionariosDao;
+import teste.TesteCpf;
+
 /**
  *
  * @author ALPHA OMEGA
  */
 public class TelaFuncionarios extends javax.swing.JInternalFrame {
 
+    
     /**
      * Creates new form TelaFuncionarios
      */
@@ -62,6 +69,11 @@ public class TelaFuncionarios extends javax.swing.JInternalFrame {
         btnCadastrar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/disquete (1).png"))); // NOI18N
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
@@ -82,6 +94,11 @@ public class TelaFuncionarios extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
         txtCpf.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCpfFocusLost(evt);
+            }
+        });
 
         try {
             txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # #### ####")));
@@ -169,6 +186,38 @@ public class TelaFuncionarios extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        // TODO add your handling code here:
+        
+        DataSource dataSource = new DataSource();
+        Funcionarios novo = new Funcionarios();
+        FuncionariosDao dao = new FuncionariosDao(dataSource);
+        
+        novo.setNome(txtNome.getText());
+        novo.setCpf(txtCpf.getText());
+        novo.setTelefone(txtTelefone.getText());
+        novo.setFuncao(txtFuncao.getText());
+        
+        dao.cadastroFuncionarios(novo.getNome(), novo.getCpf(), novo.getTelefone(), novo.getFuncao());
+        
+        txtNome.setText("");
+        txtCpf.setText("");
+        txtTelefone.setText("");
+        txtFuncao.setText("");
+        
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
+        // TODO add your handling code here:
+              
+        String cpf = new String(txtCpf.getText());
+        
+        if (TesteCpf.isCPF(cpf)!=false){
+            JOptionPane.showMessageDialog(null, "CPF Inválido!");
+            txtCpf.setText("");
+        }
+    }//GEN-LAST:event_txtCpfFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

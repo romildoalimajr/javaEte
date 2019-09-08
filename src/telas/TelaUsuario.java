@@ -7,7 +7,10 @@ package telas;
 
 import conexao.DataSource;
 import static java.awt.Color.red;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
 import modelBean.Usuario;
+import modelDao.UsuarioDao;
 
 /**
  *
@@ -221,19 +224,32 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         // Código do botão cadastrar
         
         DataSource dataSource = new DataSource();
-      
-        Usuario cadastro = new Usuario();
+        Usuario novo = new Usuario();
+        UsuarioDao dao = new UsuarioDao(dataSource);
         
-        String nome = new String(txtNome.getText().trim());
-        String login = new String(txtLogin.getText().trim());
-        String cpf = new String(txtCpf.getText().trim());
-        String senha = new String(passSenha.getPassword());
-        
-        cadastro.setNome(nome);
-        cadastro.setLogin(login);
-        cadastro.setCpf(cpf);
-        cadastro.setSenha(senha);
-     
+        if (Arrays.equals(passSenha.getPassword(), passConfirme.getPassword())){
+            
+            String senhas = new String(passSenha.getPassword());
+            
+           novo.setNome(txtNome.getText());
+           novo.setLogin(txtLogin.getText());
+           novo.setCpf(txtCpf.getText());
+           novo.setSenha(senhas);
+           
+           dao.cadastroUsuario(novo.getNome(),novo.getLogin(), novo.getCpf(), novo.getSenha());
+            
+            txtNome.setText("");
+            txtCpf.setText("");
+            txtLogin.setText("");
+            passSenha.setText("");
+            passConfirme.setText("");
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Senhas não conferem!");
+            passSenha.setText("");
+            passConfirme.setText("");
+        }
+       
 
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
