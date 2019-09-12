@@ -114,7 +114,6 @@
           <Image iconType="3" name="/imagens/iconeAlterar.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Alterar"/>
-        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JInternalFrame" name="jInternalFrame1">
@@ -426,6 +425,7 @@
           <Image iconType="3" name="/imagens/iconeProdutos.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarActionPerformed"/>
@@ -440,7 +440,6 @@
           <Image iconType="3" name="/imagens/iconePesquisar.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Buscar"/>
-        <Property name="enabled" type="boolean" value="false"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
@@ -453,7 +452,6 @@
           <Image iconType="3" name="/imagens/iconeExcluir.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Excluir"/>
-        <Property name="enabled" type="boolean" value="false"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
     </Component>
@@ -588,14 +586,14 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Cadastro de Ve&#xed;culos"/>
+        <Property name="text" type="java.lang.String" value="Consulta de Ve&#xed;culos"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
             <BevelBorder>
               <Color PropertyName="highlightOuter" blue="0" green="0" red="0" type="rgb"/>
               <Color PropertyName="highlightInner" blue="0" green="ff" red="ff" type="rgb"/>
-              <Color PropertyName="shadowOuter" blue="0" green="0" red="0" type="rgb"/>
-              <Color PropertyName="shadowInner" blue="33" green="0" red="ff" type="rgb"/>
+              <Color PropertyName="shadowOuter" blue="99" green="99" red="99" type="rgb"/>
+              <Color PropertyName="shadowInner" blue="0" green="cc" red="0" type="rgb"/>
             </BevelBorder>
           </Border>
         </Property>

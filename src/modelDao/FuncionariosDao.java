@@ -10,12 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelBean.Funcionarios;
-
-
 
 /**
  *
@@ -27,16 +23,41 @@ public class FuncionariosDao {
     public FuncionariosDao(DataSource dataSource){
         this.dataSource = dataSource;
     }
+    public boolean alterarFuncionarios(){
+        boolean alterar = false;
+        
+        DataSource dataSource = new DataSource();
+       
+        try{
+             String sql = "UPDATE funcionarios SET nome=?, cpf=?, telefone=?, funcao=?;";
+             
+             PreparedStatement ps = dataSource.getConnection().prepareStatement(sql);
+//             ps.setString(1, setNome("nome").getText());
+//             ps.setString(2, setCpf("cpf").getText());
+//             ps.setString(3, setTelefone("telefone").getText());
+//             ps.setString(4, setFuncao("funcao").getText());
+             
+             int rowsUpdated = ps.executeUpdate();
+             
+             if(rowsUpdated > 0){
+                 JOptionPane.showMessageDialog(null, "Alteração efetuada!");
+             }
+             return true;
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Nada foi alterado!..." + ex);
+        }
+       return false;
+    }
     
     public void cadastroFuncionarios(String nome, String cpf, String telefone, String funcao ){
-        
+    
         DataSource dataSource = new DataSource();
         
         try {
            
             PreparedStatement ps = dataSource.getConnection().prepareStatement("INSERT INTO funcionarios (nome, cpf, telefone, funcao) "
                 + "VALUES (?,?,?,?);");
-            
+           
             ps.setString(1, nome);
             ps.setString(2, cpf);
             ps.setString(3, telefone);
@@ -55,7 +76,6 @@ public class FuncionariosDao {
             dataSource.closeDataSource();
         }
     }
-    
     public ArrayList<Funcionarios> readAll(){
         
         try{
@@ -86,6 +106,20 @@ public class FuncionariosDao {
         }
         return null;
     }
-    
-    
+    public void deleteFuncionario(){   
+         DataSource dataSource = new DataSource();
+     
+        String sql = "DELETE FROM funcionarios WHERE nome=?";
+    try{
+        PreparedStatement ps = dataSource.getConnection().prepareStatement(sql);
+//        ps.setString(1, setNome("nome").getText());
+ 
+            int rowsDeleted = ps.executeUpdate();
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(null, "Funcionário Deletado!");
+}
+    }catch(SQLException ex){
+         JOptionPane.showMessageDialog(null, "Usuário não deletado!..." +ex);
+        }
+    }
 }

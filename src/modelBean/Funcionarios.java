@@ -7,7 +7,7 @@ package modelBean;
 
 /**
  *
- * @author ALPHA OMEGA
+ * @author Romildo A. Lima Jr.
  */
 public class Funcionarios {
     

@@ -18,12 +18,12 @@ import modelDao.VeiculosDao;
  *
  * @author Romildo A. Lima Jr.
  */
-public class TelaVeiculos extends javax.swing.JInternalFrame {
+public class TelaVeiculosConsulta extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form TelaVeiculos
      */
-    public TelaVeiculos() {
+    public TelaVeiculosConsulta() {
         initComponents();
  
         SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
@@ -81,7 +81,6 @@ public class TelaVeiculos extends javax.swing.JInternalFrame {
         btnAlterar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconeAlterar.png"))); // NOI18N
         btnAlterar.setText("Alterar");
-        btnAlterar.setEnabled(false);
 
         jInternalFrame1.setBackground(new java.awt.Color(204, 0, 0));
         jInternalFrame1.setBorder(null);
@@ -249,6 +248,7 @@ public class TelaVeiculos extends javax.swing.JInternalFrame {
         btnCadastrar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconeProdutos.png"))); // NOI18N
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setEnabled(false);
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -258,13 +258,11 @@ public class TelaVeiculos extends javax.swing.JInternalFrame {
         btnBuscar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconePesquisar.png"))); // NOI18N
         btnBuscar.setText("Buscar");
-        btnBuscar.setEnabled(false);
         btnBuscar.setFocusable(false);
 
         btnExcluir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconeExcluir.png"))); // NOI18N
         btnExcluir.setText("Excluir");
-        btnExcluir.setEnabled(false);
         btnExcluir.setFocusable(false);
 
         jInternalFrame3.setBackground(new java.awt.Color(204, 0, 0));
@@ -325,8 +323,8 @@ public class TelaVeiculos extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 0));
-        jLabel1.setText("Cadastro de Veículos");
-        jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 0, 51)));
+        jLabel1.setText("Consulta de Veículos");
+        jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 0), new java.awt.Color(153, 153, 153), new java.awt.Color(0, 204, 0)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
