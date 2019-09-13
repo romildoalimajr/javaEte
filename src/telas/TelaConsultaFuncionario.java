@@ -8,6 +8,8 @@ package telas;
 import conexao.DataSource;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import modelBean.Funcionarios;
 import modelBean.Usuario;
 import modelDao.FuncionariosDao;
@@ -25,6 +27,27 @@ public class TelaConsultaFuncionario extends javax.swing.JInternalFrame {
      */
     public TelaConsultaFuncionario() {
         initComponents();
+        
+        DefaultTableModel modelo = (DefaultTableModel)tabelaFuncionarios.getModel();
+        tabelaFuncionarios.setRowSorter(new TableRowSorter(modelo));
+        
+    }
+    
+    public void readTable(){
+        DataSource dataSource = new DataSource();
+        DefaultTableModel modelo = (DefaultTableModel)tabelaFuncionarios.getModel();
+        
+        FuncionariosDao dao = new FuncionariosDao(dataSource);
+        
+        dao.buscaFuncionarios().forEach((func) -> {
+            modelo.addRow(new Object[]{
+                func.getId(),
+                func.getNome(),
+                func.getCpf(),
+                func.getTelefone(),
+                func.getFuncao()
+            });
+        });
     }
 
     /**
@@ -311,11 +334,10 @@ public class TelaConsultaFuncionario extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // Código do botao buscar
-        
         DataSource dataSource = new DataSource();
-        
         FuncionariosDao dao = new FuncionariosDao(dataSource);
-        
+        dao.buscaFuncionarios();
+        readTable();
     
         
         

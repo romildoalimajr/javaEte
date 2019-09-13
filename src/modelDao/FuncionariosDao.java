@@ -76,50 +76,32 @@ public class FuncionariosDao {
             dataSource.closeDataSource();
         }
     }
-    public ArrayList<Funcionarios> readAll(){
+    public ArrayList<Funcionarios> buscaFuncionarios(){
+        DataSource dataSource = new DataSource();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;        
+        String sql = "SELECT * FROM funcionarios";
         
-        try{
-            String sql = "SELECT * FROM funcionarios";
-            
-            PreparedStatement ps = dataSource.getConnection().prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            
-            ArrayList<Funcionarios> lista = new ArrayList<Funcionarios>();
+        ArrayList<Funcionarios> func = new ArrayList<>();
+        
+        try {
+            stmt = dataSource.getConnection().prepareStatement(sql);
+            rs = stmt.executeQuery();
             
             while(rs.next()){
+                
                 Funcionarios funcionario = new Funcionarios();
-                funcionario.setId(rs.getInt("id"));
+                
+                funcionario.setId(rs.getInt("codigo"));
                 funcionario.setNome(rs.getString("nome"));
                 funcionario.setCpf(rs.getString("cpf"));
-                funcionario.setFuncao(rs.getString("funcao"));
                 funcionario.setTelefone(rs.getString("telefone"));
-                lista.add(funcionario);
+                funcionario.setFuncao(rs.getString("funcao"));
+                funcionario.toString();
             }
-            ps.close();
-            return lista;
+        } catch (SQLException ex) {
+            System.err.println("Deu ruim.... " +ex);
         }
-        catch(SQLException ex){
-            System.err.println("Erro ao recuperar..."+ ex.getMessage());
-        }
-        catch(Exception ex){
-            System.err.println("Erro geral..."+ ex.getMessage());
-        }
-        return null;
-    }
-    public void deleteFuncionario(){   
-         DataSource dataSource = new DataSource();
-     
-        String sql = "DELETE FROM funcionarios WHERE nome=?";
-    try{
-        PreparedStatement ps = dataSource.getConnection().prepareStatement(sql);
-//        ps.setString(1, setNome("nome").getText());
- 
-            int rowsDeleted = ps.executeUpdate();
-            if (rowsDeleted > 0) {
-                JOptionPane.showMessageDialog(null, "Funcionário Deletado!");
-}
-    }catch(SQLException ex){
-         JOptionPane.showMessageDialog(null, "Usuário não deletado!..." +ex);
-        }
+        return func;   
     }
 }

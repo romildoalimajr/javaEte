@@ -200,13 +200,14 @@ public class TelaFuncionarios extends javax.swing.JInternalFrame {
                 .addGap(7, 7, 7)
                 .addComponent(txtFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastrar)
-                    .addComponent(btnCancelar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnAlterar)
                         .addComponent(btnBuscar)
-                        .addComponent(btnExcluir)))
+                        .addComponent(btnExcluir))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCadastrar)
+                        .addComponent(btnCancelar)))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
 
